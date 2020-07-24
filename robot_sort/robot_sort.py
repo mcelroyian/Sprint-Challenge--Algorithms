@@ -97,7 +97,7 @@ class SortingRobot:
         Sort the robot's list.
         """
         print("entering sort")
-        if self._time == 0:
+        if self._position == 0:
             self.check_next()
         print(f"light is {self._light}")
         if not self.light_is_on:
@@ -134,10 +134,13 @@ class SortingRobot:
         if self.can_move_right():
             self.check_next()
         else:
-            self.return_to_start()
-            print("back at start")
-            print(f"current position is {self._position}")
-            print(f"light is {self._light}")
+            if self.light_is_on:
+                self.return_to_start()
+                print("back at start")
+                print(f"current position is {self._position}")
+                print(f"light is {self._light}")
+            else:
+                self.sort()
     
     def return_to_start(self):
         if self.can_move_left():
